@@ -48,31 +48,6 @@ AddEventHandler('esx:Client:OnPlayerUnload', function()
     isLoggedIn = false
 end)
 
--- Citizen.CreateThread(function()
---   while true do
---     if ESX ~= nil then
---       if isLoggedIn then
---           --  TriggerServerEvent('prime_radio:server:GetItem', function(hasItem)
---           --QBCore.Functions.TriggerCallback('prime_radio:server:GetItem', function(hasItem)
---           -- if not hasItem then
---             -- if exports.tokovoip_script ~= nil and next(exports.tokovoip_script) ~= nil then
---               local getPlayerRadioChannel = exports["mumble-voip"]:SetMumbleProperty("radioEnabled", toggle)
-
---               if getPlayerRadioChannel ~= "nil" then
---                 exports.tokovoip_script:removePlayerFromRadio(getPlayerRadioChannel)
---                 -- exports.tokovoip_script:setPlayerData(playerName, "radio:channel", "nil", true)
---                 -- exports['mythic_notify']:DoHudText('inform', Config.messages['you_leave'] .. getPlayerRadioChannel .. '.00 MHz </b>')
---                 -- QBCore.Functions.Notify('You are removed from your current frequency!', 'error')
---               end
---             -- end
---           -- end
---         -- end, "radio")
---       end
---     end
-
---     Citizen.Wait(10000)
---   end
--- end)
 
 RegisterNUICallback('joinRadio', function(data, cb)
   local _source = source
@@ -149,20 +124,20 @@ Citizen.CreateThread(function()
     if (IsDisabledControlJustReleased(1, 199) and  IsControlPressed(1, 21)) then
       local amount = exports["crp-inventory"]:hasEnoughOfItem("radio",1)
       if amount then
-        TriggerEvent('prime_radio:use')
+        TriggerEvent('radio:use')
       end
     end
   end
 end)
 
 
-RegisterNetEvent('prime_radio:use')
-AddEventHandler('prime_radio:use', function()
+RegisterNetEvent('radio:use')
+AddEventHandler('radio:use', function()
   enableRadio(true)
 end)
 
-RegisterNetEvent('prime_radio:onRadioDrop')
-AddEventHandler('prime_radio:onRadioDrop', function()
+RegisterNetEvent('radio:onRadioDrop')
+AddEventHandler('radio:onRadioDrop', function()
   local playerName = GetPlayerName(PlayerId())
   -- local getPlayerRadioChannel = exports.tokovoip_script:getPlayerData(playerName, "radio:channel")
 
